@@ -10,72 +10,40 @@
       background-color: #101010;
       color: #eee;
       padding: 2rem;
+      margin: 0;
     }
     h1 {
       color: #00d4ff;
+      text-align: center;
+    }
+    nav {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    nav a {
+      color: #00d4ff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      margin: 0 1rem;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    nav a:hover {
+      background-color: #333;
     }
     section {
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
     }
     .box {
       background: #1e1e1e;
       padding: 1rem;
       border-radius: 5px;
     }
-  </style>
-</head>
-<body>
-  <h1>Racing Sandbox Game Tracker</h1>
-
-  <section class="box">
-    <h2>Current Focus</h2>
-    <p>Building out the core game map and realistic starter garage.</p>
-  </section>
-
-  <section class="box">
-    <h2>Map Overview</h2>
-    <ul>
-      <li>Condensed LA-style city</li>
-      <li>Japanese countryside with touge roads</li>
-      <li>Open-world drift track and drag strip</li>
-      <li>Dynamic scenery (sunsets, weather, traffic)</li>
-    </ul>
-  </section>
-
-  <section class="box">
-    <h2>Garage</h2>
-    <p>Start in a small, rented garage behind a townhouse — humble beginnings.</p>
-  </section>
-
-  <section class="box">
-    <h2>Visual Goals</h2>
-    <p>High-end graphics like GTA 6 and Forza with ray tracing and realistic vegetation.</p>
-  </section>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Racing Sandbox Game Tracker</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #101010;
-      color: #eee;
-      padding: 2rem;
-      position: relative;
-    }
-    h1 {
-      color: #00d4ff;
-    }
-    section {
-      margin-bottom: 2rem;
-    }
-    .box {
-      background: #1e1e1e;
-      padding: 1rem;
+    .box img {
+      width: 100%;
+      height: auto;
       border-radius: 5px;
     }
     .number-23 {
@@ -91,31 +59,62 @@
 <body>
   <h1>Racing Sandbox Game Tracker</h1>
 
-  <section class="box">
-    <h2>Current Focus</h2>
-    <p>Building out the core game map and realistic starter garage.</p>
-  </section>
-
-  <section class="box">
-    <h2>Map Overview</h2>
-    <ul>
-      <li>Condensed LA-style city</li>
-      <li>Japanese countryside with touge roads</li>
-      <li>Open-world drift track and drag strip</li>
-      <li>Dynamic scenery (sunsets, weather, traffic)</li>
-    </ul>
-  </section>
-
-  <section class="box">
-    <h2>Garage</h2>
-    <p>Start in a small, rented garage behind a townhouse — humble beginnings.</p>
-  </section>
-
-  <section class="box">
-    <h2>Visual Goals</h2>
-    <p>High-end graphics like GTA 6 and Forza with ray tracing and realistic vegetation.</p>
-  </section>
+  <nav>
+    <a href="#current-focus">Current Focus</a>
+    <a href="#map-overview">Map Overview</a>
+    <a href="#garage">Garage</a>
+    <a href="#visual-goals">Visual Goals</a>
+    <a href="#images">Images</a>
+  </nav>
 
   <div class="number-23">23</div>
+
+  <section id="current-focus" class="box">
+    <h2>Current Focus</h2>
+    <p>Building out the core game map and realistic starter garage. We're making steady progress on creating a map layout that blends different car culture elements, from city streets to countryside roads.</p>
+  </section>
+
+  <section id="map-overview" class="box">
+    <h2>Map Overview</h2>
+    <p>The map will include various areas like:</p>
+    <ul>
+      <li>Condensed LA-style city with tight streets and an urban feel</li>
+      <li>Japanese-inspired countryside roads (touge) for drifting</li>
+      <li>A dedicated drift track and a drag strip for racing</li>
+      <li>Dynamic scenery including sunsets, weather, and traffic</li>
+    </ul>
+    <p>We aim for a map as expansive as GTA V, filled with realistic props like gas stations, breakable objects, animals, and more!</p>
+    <!-- Placeholder for map image -->
+    <img src="map-placeholder.jpg" alt="Map of the racing sandbox game" />
+  </section>
+
+  <section id="garage" class="box">
+    <h2>Garage</h2>
+    <p>Start in a humble, rented garage behind a townhouse. This is where players will begin their journey before upgrading their space and cars.</p>
+    <!-- Placeholder for garage image -->
+    <img src="garage-placeholder.jpg" alt="Starter garage" />
+  </section>
+
+  <section id="visual-goals" class="box">
+    <h2>Visual Goals</h2>
+    <p>We’re aiming for high-end graphics with ray tracing and realistic terrain, inspired by games like GTA 6 and Forza. The goal is to create a visually stunning experience with realistic lighting, vegetation, and weather effects.</p>
+    <p>The game will feature detailed environments, including:</p>
+    <ul>
+      <li>Realistic terrain for racing</li>
+      <li>Dynamic weather and time of day</li>
+      <li>Detailed vehicle models and modifications</li>
+    </ul>
+    <!-- Placeholder for visual inspiration image -->
+    <img src="visual-inspiration-placeholder.jpg" alt="Visual goals and inspiration" />
+  </section>
+
+  <section id="images" class="box">
+    <h2>Images and Inspirations</h2>
+    <p>Here are some inspirational images that describe the design direction we’re taking for the game:</p>
+    <ul>
+      <li><img src="image1-placeholder.jpg" alt="Inspiration image 1" /></li>
+      <li><img src="image2-placeholder.jpg" alt="Inspiration image 2" /></li>
+    </ul>
+  </section>
 </body>
 </html>
