@@ -5,13 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Racing Sandbox: Countryside Garage</title>
   <style>
-    body { margin: 0; overflow: hidden; }
+    body { margin: 0; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
     canvas { display: block; }
+
+    /* Floating 23 */
+    #corner-number {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 42px;
+      color: #ff2b2b;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+      z-index: 10;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/controls/FlyControls.js"></script>
+  <div id="corner-number">23</div>
+
+  <!-- Three.js & FlyControls -->
+  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.155.0/examples/js/controls/FlyControls.js"></script>
 
   <script>
     // Scene setup
@@ -40,7 +56,7 @@
 
     // Ground / terrain (placeholder)
     const groundGeometry = new THREE.PlaneGeometry(500, 500, 50, 50);
-    const groundMaterial = new THREE.MeshLambertMaterial({ color: 0x228b22, wireframe: false });
+    const groundMaterial = new THREE.MeshLambertMaterial({ color: 0x228b22 });
     const ground = new THREE.Mesh(groundGeometry, groundMaterial);
     ground.rotation.x = -Math.PI / 2;
     scene.add(ground);
