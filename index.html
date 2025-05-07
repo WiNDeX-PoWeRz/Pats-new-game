@@ -3,118 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Racing Sandbox Game Tracker</title>
+  <title>Racing Sandbox: Countryside Garage</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #101010;
-      color: #eee;
-      padding: 2rem;
-      margin: 0;
-    }
-    h1 {
-      color: #00d4ff;
-      text-align: center;
-    }
-    nav {
-      background-color: #1e1e1e;
-      padding: 1rem;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    nav a {
-      color: #00d4ff;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      margin: 0 1rem;
-      font-weight: bold;
-      border-radius: 5px;
-    }
-    nav a:hover {
-      background-color: #333;
-    }
-    section {
-      margin-bottom: 3rem;
-    }
-    .box {
-      background: #1e1e1e;
-      padding: 1rem;
-      border-radius: 5px;
-    }
-    .box img {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-    .number-23 {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 5rem;
-      color: red;
-      font-weight: bold;
-    }
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
   </style>
 </head>
 <body>
-  <h1>Racing Sandbox Game Tracker</h1>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/controls/FlyControls.js"></script>
 
-  <nav>
-    <a href="#current-focus">Current Focus</a>
-    <a href="#map-overview">Map Overview</a>
-    <a href="#garage">Garage</a>
-    <a href="#visual-goals">Visual Goals</a>
-    <a href="#images">Images</a>
-  </nav>
+  <script>
+    // Scene setup
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x87ceeb); // Sky blue
 
-  <div class="number-23">23</div>
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    camera.position.set(0, 10, 50);
 
-  <section id="current-focus" class="box">
-    <h2>Current Focus</h2>
-    <p>Building out the core game map and realistic starter garage. We're making steady progress on creating a map layout that blends different car culture elements, from city streets to countryside roads.</p>
-  </section>
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
-  <section id="map-overview" class="box">
-    <h2>Map Overview</h2>
-    <p>The map will include various areas like:</p>
-    <ul>
-      <li>Condensed LA-style city with tight streets and an urban feel</li>
-      <li>Japanese-inspired countryside roads (touge) for drifting</li>
-      <li>A dedicated drift track and a drag strip for racing</li>
-      <li>Dynamic scenery including sunsets, weather, and traffic</li>
-    </ul>
-    <p>We aim for a map as expansive as GTA V, filled with realistic props like gas stations, breakable objects, animals, and more!</p>
-    <!-- Placeholder for map image -->
-    <img src="map-placeholder.jpg" alt="Map of the racing sandbox game" />
-  </section>
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
 
-  <section id="garage" class="box">
-    <h2>Garage</h2>
-    <p>Start in a humble, rented garage behind a townhouse. This is where players will begin their journey before upgrading their space and cars.</p>
-    <!-- Placeholder for garage image -->
-    <img src="garage-placeholder.jpg" alt="Starter garage" />
-  </section>
+    const sun = new THREE.DirectionalLight(0xffffff, 1);
+    sun.position.set(50, 100, 50);
+    scene.add(sun);
 
-  <section id="visual-goals" class="box">
-    <h2>Visual Goals</h2>
-    <p>We’re aiming for high-end graphics with ray tracing and realistic terrain, inspired by games like GTA 6 and Forza. The goal is to create a visually stunning experience with realistic lighting, vegetation, and weather effects.</p>
-    <p>The game will feature detailed environments, including:</p>
-    <ul>
-      <li>Realistic terrain for racing</li>
-      <li>Dynamic weather and time of day</li>
-      <li>Detailed vehicle models and modifications</li>
-    </ul>
-    <!-- Placeholder for visual inspiration image -->
-    <img src="visual-inspiration-placeholder.jpg" alt="Visual goals and inspiration" />
-  </section>
+    // Ground / terrain (placeholder)
+    const groundGeometry = new THREE.PlaneGeometry(500, 500, 50, 50);
+    const groundMaterial = new THREE.MeshLambertMaterial({ color: 0x228b22, wireframe: false });
+    const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+    ground.rotation.x = -Math.PI / 2;
+    scene.add(ground);
 
-  <section id="images" class="box">
-    <h2>Images and Inspirations</h2>
-    <p>Here are some inspirational images that describe the design direction we’re taking for the game:</p>
-    <ul>
-      <li><img src="image1-placeholder.jpg" alt="Inspiration image 1" /></li>
-      <li><img src="image2-placeholder.jpg" alt="Inspiration image 2" /></li>
-    </ul>
-  </section>
+    // Small garage (placeholder cube)
+    const garageGeometry = new THREE.BoxGeometry(10, 6, 8);
+    const garageMaterial = new THREE.MeshStandardMaterial({ color: 0x8b4513 });
+    const garage = new THREE.Mesh(garageGeometry, garageMaterial);
+    garage.position.set(0, 3, 0);
+    scene.add(garage);
+
+    // Controls (fly-through)
+    const controls = new THREE.FlyControls(camera, renderer.domElement);
+    controls.movementSpeed = 20;
+    controls.rollSpeed = Math.PI / 12;
+    controls.autoForward = false;
+    controls.dragToLook = true;
+
+    // Render loop
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update(0.01);
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Handle resizing
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 </body>
 </html>
