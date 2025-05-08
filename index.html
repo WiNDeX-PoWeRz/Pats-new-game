@@ -17,15 +17,19 @@
       display: flex;
       justify-content: space-around;
     }
+    #menu div {
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <div id="menu">
-    <div>Home</div>
-    <div>Map</div>
-    <div>Garage</div>
+    <div onclick="loadHome()">Home</div>
+    <div onclick="loadMap()">Map</div>
+    <div onclick="loadGarage()">Garage</div>
     <div>City (Coming Soon)</div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/controls/OrbitControls.js"></script>
   <script>
@@ -74,6 +78,23 @@
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
+
+    // Menu actions
+    function loadHome() {
+      alert('Home clicked');
+      // Future: load Home scene content here
+    }
+
+    function loadMap() {
+      alert('Map clicked');
+      // Future: load Map scene here
+    }
+
+    function loadGarage() {
+      alert('Garage clicked');
+      // Future: load Garage scene here
+    }
+
   </script>
 </body>
 </html>
