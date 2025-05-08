@@ -2,112 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Racing Sandbox: Countryside Garage</title>
+  <title>Project Velocity</title>
   <style>
-    body { margin: 0; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
+    body { margin: 0; overflow: hidden; }
     canvas { display: block; }
-
-    #corner-number {
-      position: fixed;
-      top: 20px;
-      right: 30px;
-      font-size: 42px;
-      color: #ff2b2b;
-      font-weight: bold;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-      z-index: 10;
-      user-select: none;
-    }
-
-    #menu-bar {
-      position: fixed;
+    #menu {
+      position: absolute;
       top: 0;
-      left: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 10px 20px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 10px;
+      font-family: sans-serif;
       display: flex;
-      gap: 20px;
-      color: white;
-      z-index: 11;
-    }
-
-    #menu-bar a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: color 0.3s;
-    }
-
-    #menu-bar a:hover {
-      color: #ffcc00;
+      justify-content: space-around;
     }
   </style>
 </head>
 <body>
-  <div id="menu-bar">
-    <a href="#">Home</a>
-    <a href="#">Map</a>
-    <a href="#">Garage</a>
-    <a href="#">City (Coming Soon)</a>
+  <div id="menu">
+    <div>Home</div>
+    <div>Map</div>
+    <div>Garage</div>
+    <div>City (Coming Soon)</div>
   </div>
-  <div id="corner-number">23</div>
-
-  <!-- Three.js and OrbitControls -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/controls/OrbitControls.js"></script>
-
   <script>
+    // Scene setup
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x87ceeb); // Sky blue
+    scene.background = new THREE.Color(0x87ceeb);
 
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
     camera.position.set(0, 20, 50);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    // Renderer setup
+    const renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+    // Controls setup
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
 
+    // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(50, 100, 50);
+    scene.add(directionalLight);
 
-    const sun = new THREE.DirectionalLight(0xffffff, 1);
-    sun.position.set(50, 100, 50);
-    scene.add(sun);
-
-    const groundGeometry = new THREE.PlaneGeometry(500, 500, 50, 50);
-    const groundMaterial = new THREE.MeshLambertMaterial({ color: 0x228b22 });
+    // Ground
+    const groundGeometry = new THREE.PlaneGeometry(500, 500);
+    const groundMaterial = new THREE.MeshLambertMaterial({color: 0x228b22});
     const ground = new THREE.Mesh(groundGeometry, groundMaterial);
     ground.rotation.x = -Math.PI / 2;
     scene.add(ground);
 
-    const garageGeometry = new THREE.BoxGeometry(10, 6, 8);
-    const garageMaterial = new THREE.MeshStandardMaterial({ color: 0x8b4513 });
-    const garage = new THREE.Mesh(garageGeometry, garageMaterial);
-    garage.position.set(0, 3, 0);
-    scene.add(garage);
-
+    // Animation loop
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
     }
-
     animate();
 
-    window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth/window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
