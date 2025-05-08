@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Project Velocity</title>
   <style>
-    body { margin: 0; overflow: hidden; font-family: sans-serif; }
+    body { margin: 0; overflow: hidden; }
     canvas { display: block; }
     #menu {
       position: absolute;
@@ -13,85 +13,21 @@
       background: rgba(0,0,0,0.5);
       color: white;
       padding: 10px;
+      font-family: sans-serif;
       display: flex;
       justify-content: space-around;
     }
     #menu div {
       cursor: pointer;
-      padding: 5px 20px;
-      border: 1px solid white;
-    }
-    #home, #map, #garage {
-      display: none;
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: white;
-      text-align: center;
-      padding-top: 50px;
-    }
-    .scene-content {
-      font-size: 24px;
-      margin-top: 20px;
-    }
-    .scene-background {
-      background-size: cover;
-      background-position: center;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0.7;
-    }
-    .scene-background img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
   </style>
 </head>
 <body>
   <div id="menu">
-    <div onclick="showHome()">Home</div>
-    <div onclick="showMap()">Map</div>
-    <div onclick="showGarage()">Garage</div>
+    <div onclick="loadHome()">Home</div>
+    <div onclick="loadMap()">Map</div>
+    <div onclick="loadGarage()">Garage</div>
     <div>City (Coming Soon)</div>
-  </div>
-
-  <!-- Home Scene -->
-  <div id="home">
-    <div class="scene-background">
-      <img src="https://via.placeholder.com/1500x800/FF5733/FFFFFF?text=Home+Scene" alt="Home Scene">
-    </div>
-    <div class="scene-content">
-      <h1>Welcome to Project Velocity</h1>
-      <button onclick="showMap()">Go to Map</button>
-    </div>
-  </div>
-
-  <!-- Map Scene -->
-  <div id="map">
-    <div class="scene-background">
-      <img src="https://via.placeholder.com/1500x800/3498db/FFFFFF?text=Map+Scene" alt="Map Scene">
-    </div>
-    <div class="scene-content">
-      <h1>Explore the Map</h1>
-      <button onclick="showGarage()">Go to Garage</button>
-    </div>
-  </div>
-
-  <!-- Garage Scene -->
-  <div id="garage">
-    <div class="scene-background">
-      <img src="https://via.placeholder.com/1500x800/2ecc71/FFFFFF?text=Garage+Scene" alt="Garage Scene">
-    </div>
-    <div class="scene-content">
-      <h1>Welcome to Your Garage</h1>
-      <button onclick="showHome()">Back to Home</button>
-    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
@@ -100,6 +36,8 @@
     // Scene setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x87ceeb);
+
+    // Camera setup
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
     camera.position.set(0, 20, 50);
 
@@ -112,14 +50,14 @@
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
-    // Lighting setup
+    // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(50, 100, 50);
     scene.add(directionalLight);
 
-    // Ground setup
+    // Ground
     const groundGeometry = new THREE.PlaneGeometry(500, 500);
     const groundMaterial = new THREE.MeshLambertMaterial({color: 0x228b22});
     const ground = new THREE.Mesh(groundGeometry, groundMaterial);
@@ -136,34 +74,27 @@
 
     // Handle window resize
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.aspect = window.innerWidth/window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Show Home Screen
-    function showHome() {
-      document.getElementById('home').style.display = 'block';
-      document.getElementById('map').style.display = 'none';
-      document.getElementById('garage').style.display = 'none';
+    // Menu actions
+    function loadHome() {
+      alert('Home clicked');
+      // Future: load Home scene content here
     }
 
-    // Show Map Screen
-    function showMap() {
-      document.getElementById('home').style.display = 'none';
-      document.getElementById('map').style.display = 'block';
-      document.getElementById('garage').style.display = 'none';
+    function loadMap() {
+      alert('Map clicked');
+      // Future: load Map scene here
     }
 
-    // Show Garage Screen
-    function showGarage() {
-      document.getElementById('home').style.display = 'none';
-      document.getElementById('map').style.display = 'none';
-      document.getElementById('garage').style.display = 'block';
+    function loadGarage() {
+      alert('Garage clicked');
+      // Future: load Garage scene here
     }
 
-    // Start with Home screen
-    showHome();
   </script>
 </body>
 </html>
